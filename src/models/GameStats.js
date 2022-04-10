@@ -13,7 +13,7 @@ const gameStats = new mongoose.Schema({
   },
   time: {
     type: Date,
-    default: new Date(),
+    required: true,
   },
 });
 

@@ -9,7 +9,9 @@ const getStats = async (req, res) => {
         .status(400)
         .json({ code: 400, message: "User does not exist" });
 
-    let details = await GameStats.find({ contestantId: req.userId });
+    let details = await GameStats.find({ contestantId: req.userId })
+      .sort({ time: -1 })
+      .limit(50);
     return res.json({
       details,
     });
@@ -19,13 +21,14 @@ const getStats = async (req, res) => {
 };
 
 const submitStats = async (req, res) => {
-  const { contestantName, prizeEarned } = req.body;
+  const { contestantName, prizeEarned, time } = req.body;
   if (!contestantName || [null, undefined].includes(prizeEarned))
     return res
       .status(400)
       .json({ code: 400, message: "Please provide all details." });
 
   const gameStats = await new GameStats({
+    time,
     contestantName,
     prizeEarned,
     contestantId: req.userId,
