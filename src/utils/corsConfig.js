@@ -2,6 +2,7 @@ const whitelist = [
   "http://localhost:5000",
   "http://localhost:3000",
   "https://the-millionaires-quiz.vercel.app/",
+  "https://the-millionaires-quiz.vercel.app",
 ];
 
 const corsOptions = {
